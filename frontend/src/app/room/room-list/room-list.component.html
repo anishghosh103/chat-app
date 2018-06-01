@@ -17,9 +17,6 @@
     <div class="flex items-center justify-between">
       <div class="text-blue-darkest font-medium mb-1" [ngClass]="{ 'text-blue-darkest': room.active, 'text-grey-darker': !room.active }">
         {{ room.name }}
-        <span class="text-xs py-1 px-3 rounded bg-red-light text-white uppercase font-medium tracking-wide" *ngIf="!room.active">
-          Deactivated
-        </span>
       </div>
       <div class="text-white bg-green-dark font-bold text-xs px-2 py-1 rounded-full" *ngIf="room.notification">
         {{ room.notification }}
