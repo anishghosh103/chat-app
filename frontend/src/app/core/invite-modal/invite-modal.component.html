@@ -1,0 +1,40 @@
+<div class="font-roboto absolute w-screen h-screen overflow-hidden pin-t pin-l z-30 flex items-center justify-center" *ngIf="show">
+  <!-- Overlay -->
+  <div class="absolute pin-t pin-l bg-black opacity-50 w-full h-full" (click)="show = false"></div>
+  <!-- Modal -->
+  <div class="relative p-6 bg-white rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5 break-words overflow-hidden z-50">
+
+    <div class="text-2xl sm:text-3xl font-medium sm:font-normal text-blue-darkest mb-8">
+      Invite Friends To Room.
+    </div>
+
+    <div class="text-blue-darker ml-2 mb-1">
+      Copy invitation link:
+    </div>
+    <div class="bg-grey-darkest rounded text-white px-4 flex justify-between items-center mb-8">
+      <div class="py-3 text-base sm:text-xl font-light">
+        {{ baseUrl + roomId }}
+      </div>
+      <i class="icon ion-md-copy text-xl opacity-75"></i>
+    </div>
+
+    <div>
+      <div class="text-blue-darker ml-2 mb-1">
+        Share link via email:
+      </div>
+      <div class="flex flex-col sm:flex-row">
+        <input type="text" placeholder="Your friend's email." class="bg-grey-lighter py-4 px-6 flex-1 outline-none text-lg font-light sm:mb-2 rounded sm:rounded-r-none focus:shadow" [(ngModel)]="email">
+        <div>
+          <button class="outline-none bg-green w-full sm:w-auto py-4 px-6 sm:px-8 text-base sm:text-lg font-bold sm:font-light text-white hover:bg-green-dark active:bg-green-darker rounded sm:rounded-l-none" [ngClass]="{ 'cursor-not-allowed opacity-50': processing }" (click)="sendLink()" [disabled]="processing">
+            {{ processing ? 'Processing...' : 'Send Link' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute pin-t pin-r mr-2">
+      <i class="icon ion-md-close text-3xl text-red cursor-pointer" (click)="close()"></i>
+    </div>
+
+  </div>
+</div>

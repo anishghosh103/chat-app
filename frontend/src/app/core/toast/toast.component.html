@@ -1,0 +1,15 @@
+<div class="absolute pin-b pin-r flex flex-col items-end z-50">
+  <div class="relative w-80 opacity-75 hover:opacity-100 cursor-pointer m-4" [@flashAnim] *ngFor="let message of messages; let i = index">
+    <div class="font-roboto py-4 px-6 bg-red text-white rounded" [ngClass]="{ 'bg-red border-red-dark': message.type === 'error', 'bg-blue-dark border-blue-darker': message.type === 'info' }">
+      <div class="font-medium mb-1">
+        {{ message.title }}
+      </div>
+      <div class="text-sm">
+        {{ message.body }}
+      </div>
+      <span class="absolute pin-t pin-r -mr-2 -mt-2 bg-red-dark py-1 px-2 rounded-full cursor-pointer" (click)="close(i)">
+        <i class="icon ion-md-close"></i>
+      </span>
+    </div>
+  </div>
+</div>

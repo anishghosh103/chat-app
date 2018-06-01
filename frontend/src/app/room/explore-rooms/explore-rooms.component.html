@@ -1,0 +1,30 @@
+<div>
+
+    <div class="mb-6 font-bold uppercase tracking-wide text-center text-blue-darker text-sm">
+      Active Rooms
+    </div>
+
+    <div class="text-sm text-center text-grey-dark" *ngIf="rooms.length === 0">
+      <div class="mb-1">
+        No Active Rooms Found.
+      </div>
+    </div>
+  
+    <div class="p-3 cursor-pointer hover:bg-blue-lightest active:bg-blue-lighter" *ngFor="let room of rooms" (click)="roomClicked(room.roomId)">
+      <div class="flex items-center">
+        <div class="w-8 flex-no-shrink">
+          <i class="icon ion-md-add text-2xl text-blue-lighter hover:text-blue" *ngIf="!isMemberOf(room)" (click)="joinRoom(room.roomId)"></i>
+          <i class="icon ion-md-checkmark text-2xl text-green-lighter" *ngIf="isMemberOf(room)"></i>
+        </div>
+        <div class="flex-1 w-full overflow-hidden">
+          <div class="text-blue-darkest font-medium mb-1">
+            {{ room.name }}
+          </div>
+          <div class="text-sm text-grey-darker h-4 truncate">
+            {{ room.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>

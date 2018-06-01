@@ -1,0 +1,75 @@
+<div class="font-roboto w-112 mx-auto my-8 bg-white p-8 shadow-lg rounded-lg">
+  
+  <div *ngIf="!signedUp">
+    <div class="mb-8">
+      <div class="text-lg sm:text-2xl font-light mb-2 sm:mb-3 text-blue-darkest">
+        Create Your Account.
+        <span class="font-medium">It's free.</span>
+      </div>
+      <div class="text-sm sm:text-base font-light text-blue-darkest">
+        If you already have an account,
+        <a routerLink="/login" class="no-underline font-normal hover:underline">Login</a>.
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <div class="text-sm sm:text-base tracking-wide sm:tracking-normal text-blue-darkest mb-1">
+        <label for="name" class="cursor-pointer ml-1">Name</label>
+      </div>
+      <input type="text" placeholder="John Doe" autocomplete="off" id="name" class="w-full bg-grey-lighter rounded outline-none px-4 py-4 hover:shadow focus:shadow border-b border-transparent focus:border-blue" [ngClass]="{ 'border-red': errors.name }" [(ngModel)]="user.name" (input)="errors.name = ''">
+      <div class="text-xs font-medium text-red-dark mt-1 text-right h-4">
+        {{ errors.name }}
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <div class="text-sm sm:text-base tracking-wide sm:tracking-normal text-blue-darkest mb-1">
+        <label for="email" class="cursor-pointer ml-1">Email</label>
+      </div>
+      <input type="text" placeholder="johndoe24@mail.com" autocomplete="off" id="email" class="w-full bg-grey-lighter rounded outline-none px-4 py-4 hover:shadow focus:shadow border-b border-transparent focus:border-blue" [ngClass]="{ 'border-red': errors.email }" [(ngModel)]="user.email" (input)="errors.email = ''">
+      <div class="text-xs font-medium text-red-dark mt-1 text-right h-4">
+        {{ errors.email }}
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <div class="text-sm sm:text-base tracking-wide sm:tracking-normal text-blue-darkest mb-1">
+        <label for="username" class="cursor-pointer ml-1">Username</label>
+      </div>
+      <input type="text" placeholder="johndoe24" autocomplete="off" id="username" class="w-full bg-grey-lighter rounded outline-none px-4 py-4 hover:shadow focus:shadow border-b focus:border-blue" [ngClass]="{ 'border-red': errors.username }" [(ngModel)]="user.username" (input)="errors.username = ''">
+      <div class="text-xs font-medium text-red-dark mt-1 text-right h-4">
+        {{ errors.username }}
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <div class="text-sm sm:text-base tracking-wide sm:tracking-normal text-blue-darkest mb-1">
+        <label for="password" class="cursor-pointer ml-1">Password</label>
+      </div>
+      <input type="password" placeholder="••••••••" id="password" class="w-full bg-grey-lighter rounded outline-none px-4 py-4 hover:shadow focus:shadow border-b border-transparent focus:border-blue" [ngClass]="{ 'border-red': errors.password }" [(ngModel)]="user.password" (input)="errors.password = ''">
+      <div class="text-xs font-medium text-red-dark mt-1 text-right h-4">
+        {{ errors.password }}
+      </div>
+    </div>
+  
+    <div class="text-right">
+      <button class="bg-green hover:bg-green-dark active:bg-green-darker text-white py-3 px-6 text-sm uppercase tracking-wide rounded outline-none" (click)="signup()" [disabled]="processing" [ngClass]="{ 'cursor-not-allowed opacity-50': processing }">
+        {{ processing ? 'Processing...' : 'Sign Up' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="text-center" *ngIf="signedUp">
+    <div class="text-2xl font-medium mb-2">
+      Your account has been created.
+    </div>
+    <div class="text-lg mb-6">
+      An activation link was sent to your email address.
+    </div>
+    <a routerLink="/login" class="no-underline outline-none py-3 px-8 bg-blue hover:bg-blue-dark active:bg-blue-darker text-white rounded font-medium uppercase tracking-wide text-sm inline-block">
+      <i class="icon ion-ios-arrow-back mr-2 text-lg relative" style="top:1.5px;"></i>
+      Back to Homepage
+    </a>
+  </div>
+
+</div>

@@ -1,0 +1,121 @@
+<div class="font-roboto flex flex-col overflow-hidden h-full max-h-screen" *ngIf="room">
+
+  <!-- Header -->
+  <div class="py-4 px-6 bg-grey-light flex justify-between items-center">
+
+    <div class="flex items-center">
+      <i class="block sm:hidden icon ion-md-arrow-back mr-4 text-3xl cursor-pointer" (click)="hideChats()"></i>
+      <div>
+        <div class="text-blue-darker font-medium mb-1">
+          {{ room.name }}
+        </div>
+        <div class="text-sm text-grey-darker" *ngIf="!userTyping">
+          {{ room.users.length }} member{{ room.users.length > 1 ? 's' : '' }}.
+        </div>
+        <div class="text-sm text-grey-darker" *ngIf="userTyping">
+          {{ userTyping }}.
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <a id="invite-btn" class="cursor-pointer inline-flex w-12 h-12 items-center justify-center hover:bg-grey active:bg-grey-dark inline-block rounded-full" (click)="showInviteModal()">
+        <i class="icon ion-md-share text-xl align-middle"></i>
+      </a>
+      <div class="relative select-none">
+        <a id="options-toggler" class="cursor-pointer inline-flex w-12 h-12 items-center justify-center hover:bg-grey active:bg-grey-dark inline-block rounded-full" (click)="toggleOptions()">
+          <i id="options-toggler" class="icon ion-md-more text-3xl"></i>
+        </a>
+        <div class="absolute z-20 flex flex-col w-56 pin-r bg-white border border-grey rounded shadow-md" *ngIf="optionsVisible">
+          <a class="cursor-pointer flex items-center py-3 px-6 hover:bg-grey-lighter active:bg-grey-light" *ngIf="room.creatorId === userId" (click)="deleteRoom()">
+            <i class="icon ion-md-trash mr-4 text-2xl text-green-dark"></i>
+            <span>Delete Room</span>
+          </a>
+          <a class="cursor-pointer flex items-center py-3 px-6 hover:bg-grey-lighter active:bg-grey-light" *ngIf="!room.active && room.creatorId === userId" (click)="activateRoom()">
+            <i class="icon ion-md-power mr-4 text-2xl text-green-dark"></i>
+            <span>Activate Room</span>
+          </a>
+          <a class="cursor-pointer flex items-center py-3 px-6 hover:bg-grey-lighter active:bg-grey-light" *ngIf="room.active && room.creatorId === userId" (click)="deactivateRoom()">
+            <i class="icon ion-md-close-circle-outline mr-4 text-2xl text-red-dark"></i>
+            <span>Deactivate Room</span>
+          </a>
+          <a class="cursor-pointer flex items-center py-3 px-6 hover:bg-grey-lighter active:bg-grey-light" *ngIf="room.active && !isMember" (click)="joinRoom()">
+            <i class="icon ion-md-add-circle-outline mr-4 text-2xl text-green-light"></i>
+            <span>Join Room</span>
+          </a>
+          <a class="cursor-pointer flex items-center py-3 px-6 hover:bg-grey-lighter active:bg-grey-light" *ngIf="isMember && room.creatorId !== userId" (click)="leaveRoom()">
+            <i class="icon ion-md-remove-circle-outline mr-4 text-2xl text-red-light"></i>
+            <span>Leave Room</span>
+          </a>
+          <a class="cursor-pointer flex items-center py-3 px-6 hover:bg-grey-lighter active:bg-grey-light" (click)="showRoomInfo()">
+            <i class="icon ion-md-information-circle-outline mr-4 text-2xl text-grey-dark"></i>
+            <span>Room Info</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- End Of Header -->
+
+  <div #messageContainer class="flex-1 flex flex-col overflow-auto">
+    <div class="w-full">
+      <div class="py-3 px-6">
+
+        <div class="text-center mt-2 mb-6" *ngIf="totalUpdates > updates.length">
+          <a class="bg-blue hover:bg-blue-dark active:bg-blue-darker py-2 px-4 rounded-2xl text-xs font-medium text-white uppercase tracking-wide cursor-pointer" [ngClass]="{ 'cursor-not-allowed opacity-50': loadingMoreMessages }" (click)="loadMore()">
+            {{ loadingMoreMessages ? 'Loading...' : 'Load More Messages' }}
+          </a>
+        </div>
+
+        <div class="flex flex-col" *ngFor="let update of updates; let i = index">
+          <!-- Chat Update -->
+          <div class="flex flex-col" [ngClass]="{ 'self-end': update.senderId === userId, 'mt-4': !isSameSender(i, 'prev'), 'mt-1': isSameSender(i, 'prev') }" *ngIf="update.type === 'chat'">
+            <!-- Sender Name -->
+            <div class="font-bold text-sm text-blue-darker ml-1 mb-1" *ngIf="update.senderId !== userId && !isSameSender(i, 'prev')">
+              {{ update.senderName }}
+            </div>
+            <!-- Message Body (w/ time) -->
+            <div class="relative px-4 pb-8 pt-4 rounded max-w-xs lg:max-w-sm break-words leading-normal text-base" style="min-width:10rem;" [ngClass]="{ 'bg-grey-lighter self-end': update.senderId === userId, 'bg-purple text-blue-lightest self-start': update.senderId !== userId }">
+              {{ update.message }}
+              <span class="absolute pin-b pin-r mb-2 mr-4 text-xs" [ngClass]="{ 'text-grey-dark': update.senderId === userId, 'text-blue-lighter': update.senderId !== userId }">
+                {{ update.time | amCalendar: {
+                  sameDay: '[Today,] hh:mm A',
+                  lastDay: '[Yesterday,] hh:mm A',
+                  lastWeek: 'dddd[,] hh:mm A',
+                  sameElse: 'DD/MMM/YY hh:mm A'
+                 } }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Notification Update -->
+          <div class="self-center mt-4" *ngIf="update.type === 'notification'">
+            <span class="inline-block mx-auto py-2 px-3 text-xs uppercase font-medium tracking-wide text-white bg-purple border-purple-darker rounded">
+              {{ parseNotification(update) }}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="bg-grey-lighter flex flex-row justify-between" *ngIf="room.active && isMember">
+    <div class="flex-1 self-stretch relative p-2">
+      <textarea placeholder="Type a message" class="outline-none resize-none w-full py-3 px-4  rounded shadow" [(ngModel)]="message" (input)="typing()"></textarea>
+    </div>
+    <div class="self-end my-2 mx-1">
+      <button class="outline-none py-3 px-4 hover:bg-grey-light active:bg-grey rounded-full" (click)="sendMessage()">
+        <i class="icon ion-ios-send text-2xl"></i>
+      </button>
+    </div>
+  </div>
+  <!-- End of Input Area -->
+
+</div>
+
+<div class="w-full h-full flex items-center justify-center text-2xl text-grey-dark font-light" *ngIf="!room">
+  No rooms selected.
+</div>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Events</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/ionicons@4.1.2/dist/css/ionicons.min.css" rel="stylesheet">
+</head>
+<body style="font-family:'Open Sans';">
+  <div class="flex flex-col w-screen h-screen overflow-hidden">
+    <!-- Header -->
+    <div id="header" class="bg-black text-white flex items-center">
+      <div class="w-1/4 text-center md:hidden">
+        <i class="icon ion-md-menu text-2xl cursor-pointer" onclick="toggleMenu()"></i>
+      </div>
+      <div class="w-1/2 md:w-full text-lg md:text-2xl text-center py-6 font-semibold">
+        Chat App
+      </div>
+    </div>
+    <div class="flex flex-1 relative">
+      <!-- Left Nav -->
+      <div id="nav" class="hidden md:block absolute md:static w-full md:w-48 py-8 px-6 bg-white shadow-lg md:shadow-none md:flex-col">
+        <div class="mb-6 flex-1">
+          <div class="text-blue font-semibold mb-2">
+            Listen:
+          </div>
+          <div class="mb-1">
+            <a href="#typing" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              typing
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#deactivated" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              deactivated
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#activated" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              activated
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#created" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              created
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#joined" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              joined
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#left" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              left
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#deleted" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              deleted
+            </a>
+          </div>
+          <div class="mb-1">
+            <a href="#update" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              update
+            </a>
+          </div>
+        </div>
+        <div class="text-left ml-6 md:ml-0 flex-1">
+          <div class="text-blue font-semibold mb-2">
+            Emit:
+          </div>
+          <div class="mb-1">
+            <a href="#typing-emit" class="no-underline hover:underline text-grey-darkest hover:text-grey-darker" style="outline:none;">
+              typing
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Events -->
+      <div id="events" class="flex-1 overflow-auto">
+        <div class="mx-8 my-4">
+          <div class="text-center text-xl text-grey-darkest font-bold uppercase tracking-wide mb-8">
+            Events Documentation
+          </div>
+          <div class="text-3xl text-black mt-6 mb-8">
+            Events to listen:
+          </div>
+          <div id="typing" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">typing</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("typing") has to be listened on the user's end to know that some user is typing in the opened room.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                  <div class="ml-3">"roomId": 'string',</div>
+                  <div class="ml-3">"userId": 'string'</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="deactivated" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">deactivated</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("deactivated") has to be listened on the user's end to know that some room has been deactivated by it's creator.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                  <div class="ml-3">"roomId": 'string'</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="activated" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">activated</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("activated") has to be listened on the user's end to know that some room has been activated by it's creator.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                  <div class="ml-3">"roomId": 'string'</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="created" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">created</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("created") has to be listened on the user's end to know that a new room has been created.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                <div class="ml-3">"roomId": 'string',</div>
+                <div class="ml-3">"name": 'string',</div>
+                <div class="ml-3">"description": 'string',</div>
+                <div class="ml-3">"creatorId": 'string',</div>
+                <div class="ml-3">"createdAt": Date,</div>
+                <div class="ml-3">"users": [{</div>
+                <div class="ml-6">"userId": 'string'</div>
+                <div class="ml-6">"lastViewed": Date</div>
+                <div class="ml-3">}],</div>
+                <div class="ml-3">"lastUpdated": Date,</div>
+                <div class="ml-3">"active": Boolean</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="joined" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">joined</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("joined") has to be listened on the user's end to know that a user has joined a room.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                <div class="ml-3">"roomId": 'string',</div>
+                <div class="ml-3">"userId": 'string',</div>
+                <div class="ml-3">"userName": 'string',</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="left" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">left</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("left") has to be listened on the user's end to know that a user has left a room.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                <div class="ml-3">"roomId": 'string',</div>
+                <div class="ml-3">"userId": 'string',</div>
+                <div class="ml-3">"userName": 'string',</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="deleted" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">deleted</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("deleted") has to be listened on the user's end to know that a room has been deleted by it's cretor.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                <div class="ml-3">"roomId": 'string',</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div id="update" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">update</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("update") has to be listened on the user's end to know that a user has send a message.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                <div class="ml-3">"roomId": 'string',</div>
+                <div class="ml-3">"type": 'string', <i class="text-grey">// 'chat' for message</i></div>
+                <div class="ml-3">"senderId": 'string',</div>
+                <div class="ml-3">"senderName": 'string',</div>
+                <div class="ml-3">"message": 'string',</div>
+                <div class="ml-3">"time": Date,</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+          <div class="text-3xl text-black my-8">
+            Events to emit:
+          </div>
+          <div id="typing-emit" class="mb-8">
+            <div class="text-xl text-black mb-3">
+              <span class="font-semibold">typing</span> event
+            </div>
+            <div class="text-grey-darkest leading-tight">
+              <div class="mb-2">
+                This event ("typing") has to be emitted by the user's end to let other user know that the user is typing.
+              </div>
+              <div class="bg-grey-darker text-sm text-white p-3 mt-1 tracking-wide rounded">
+                <div class="mb-2 font-semibold uppercase tracking-wide text-sm text-grey">
+                  Output Data
+                </div>
+                <div>{</div>
+                  <div class="ml-3">"roomId": 'string',</div>
+                  <div class="ml-3">"userId": 'string'</div>
+                <div>}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    $('document').ready(function() {
+      const headerHeight = $('#header').outerHeight();
+      $('a').each(function () {
+        $(this).click((e) => {
+          e.preventDefault();
+          const item = $($(this).attr('href'));
+          const offsetTop = $('#events').scrollTop() + item.offset().top - headerHeight - 10;
+          $('#events').stop().animate({
+            scrollTop: offsetTop
+          }, 300);
+          toggleMenu()
+        });
+      });
+    });
+    function toggleMenu() {
+      var nav = $('#nav');
+      if (nav.hasClass('hidden')) {
+        nav.removeClass('hidden');
+        nav.addClass('flex');
+      } else {
+        nav.removeClass('flex')
+        nav.addClass('hidden');
+      }
+    }
+  </script>
+</body>
+</html>

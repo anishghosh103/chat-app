@@ -1,0 +1,27 @@
+<div class="font-roboto w-112 mx-auto my-8 bg-white p-8 shadow-lg rounded-lg">
+
+    <div class="text-center" *ngIf="activated">
+      <div class="text-2xl font-medium mb-2">
+        Account activated successfully.
+      </div>
+      <div class="text-lg mb-6">
+        You can now login to your account.
+      </div>
+      <a routerLink="/login" class="no-underline outline-none py-3 px-8 bg-blue hover:bg-blue-dark active:bg-blue-darker text-white rounded font-medium uppercase tracking-wide text-sm inline-block">
+        Login
+      </a>
+    </div>
+
+    <div class="text-center" *ngIf="error">
+      <div class="text-2xl text-red mb-2">
+        {{ error }}
+      </div>
+      <div class="mb-6">
+        Please try again.
+      </div>
+      <a routerLink="/login" class="no-underline outline-none text-purple hover:text-purple-dark font-medium tracking-wide text-sm">
+        Go to Homepage
+      </a>
+    </div>
+  
+  </div>

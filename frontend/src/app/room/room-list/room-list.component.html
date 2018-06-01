@@ -1,0 +1,33 @@
+<div>
+
+  <div class="pb-6 font-bold uppercase tracking-wide text-center text-blue-darker text-sm">
+    Joined Rooms
+  </div>
+
+  <div class="text-sm text-center text-grey-dark" *ngIf="rooms.length === 0">
+    <div class="mb-1">
+      No Rooms Joined Yet.
+    </div>
+    <a routerLink="/explore" class="no-underline text-blue hover:text-blue-dark">
+      Explore Rooms
+    </a>
+  </div>
+
+  <div class="p-3 cursor-pointer hover:bg-blue-lightest active:bg-blue-lighter" *ngFor="let room of rooms | sortByLastUpdated:pipeTrigger" (click)="roomClicked(room.roomId)">
+    <div class="flex items-center justify-between">
+      <div class="text-blue-darkest font-medium mb-1" [ngClass]="{ 'text-blue-darkest': room.active, 'text-grey-darker': !room.active }">
+        {{ room.name }}
+        <span class="text-xs py-1 px-3 rounded bg-red-light text-white uppercase font-medium tracking-wide" *ngIf="!room.active">
+          Deactivated
+        </span>
+      </div>
+      <div class="text-white bg-green-dark font-bold text-xs px-2 py-1 rounded-full" *ngIf="room.notification">
+        {{ room.notification }}
+      </div>
+    </div>
+    <div class="text-sm text-grey-darker h-4 truncate">
+      {{ room.description }}
+    </div>
+  </div>
+
+</div>

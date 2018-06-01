@@ -1,0 +1,22 @@
+@tailwind preflight;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.outline-none:focus {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+background-color: darkgrey;
+outline: 1px solid slategrey;
+}

@@ -1,0 +1,33 @@
+<div class="flex w-screen h-screen overflow-hidden overflow-y-auto" (click)="onClick($event)">
+
+  <div class="flex flex-col justify-between bg-blue text-white py-6">
+    <div class="flex flex-col">
+      <a routerLink="/" routerLinkActive="bg-blue-dark text-white" [routerLinkActiveOptions]="{ exact: true }" class="p-4 hover:bg-blue-dark mb-1" (click)="hideChat()">
+        <i class="icon ion-md-home text-white text-2xl"></i>
+      </a>
+      <a routerLink="/explore" routerLinkActive="bg-blue-dark" class="p-4 hover:bg-blue-dark mb-1" (click)="hideChat()">
+        <i class="icon ion-md-compass text-white text-2xl"></i>
+      </a>
+      <a routerLink="/create-room" routerLinkActive="bg-blue-dark" class="p-4 hover:bg-blue-dark" (click)="hideChat()">
+        <i class="icon ion-md-add-circle text-white text-2xl"></i>
+      </a>
+    </div>
+    <div class="flex flex-col">
+      <a class="p-4 hover:bg-blue-dark cursor-pointer" (click)="logout()" title="Logout">
+        <i class="icon ion-md-log-out text-white text-2xl"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="flex-1 flex truncate">
+    <div class="w-full sm:w-2/5 md:w-64 h-full font-roboto py-4 shadow-lg z-20" *ngIf="doShowRouterOutlet()">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="flex-1" *ngIf="doShowChat()" >
+      <app-chat-area></app-chat-area>
+    </div>
+  </div>
+
+  <app-room-details></app-room-details>
+
+</div>

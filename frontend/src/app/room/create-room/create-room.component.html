@@ -1,0 +1,39 @@
+<div class="px-3" *ngIf="!roomCreated">
+
+  <div class="mb-8 font-bold uppercase tracking-wide text-center text-blue-darker text-sm">
+    Create New Room
+  </div>
+
+  <div class="mb-2">
+    <div class="mb-1 ml-1 text-blue-darkest font-medium text-sm">
+      <label for="name">Name</label>
+    </div>
+    <input type="text" placeholder="Web Dev" id="name" class="outline-none bg-grey-lighter border border-transparent hover:border-grey-light focus:border-grey-light py-3 px-4 w-full rounded" [(ngModel)]="room.name" maxlength="26">
+    <div class="text-red text-sm text-right mt-1 h-4">
+      {{ error.name }}
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <div class="mb-1 ml-1 text-blue-darkest font-medium text-sm">
+      <label for="description">Description</label>
+    </div>
+    <textarea placeholder="Write a description" id="description" class="outline-none bg-grey-lighter border border-transparent hover:border-grey-light focus:border-grey-light py-3 px-4 w-full rounded resize-none h-32" [(ngModel)]="room.description" maxlength="100"></textarea>
+  </div>
+
+  <div class="text-right">
+    <button class="outline-none uppercase font-medium text-xs tracking-wide px-6 py-3 bg-purple text-white rounded border border-purple-dark hover:bg-purple-dark active:bg-purple-darker" (click)="createRoom()">
+      Create Room
+    </button>
+  </div>
+
+</div>
+
+<div class="px-3 text-center text-sm" *ngIf="roomCreated">
+  <div class="text-blue-darkest mb-1">
+    Room Created Successfully.
+  </div>
+  <a class="no-underline font-medium text-blue-dark hover:text-blue-darker cursor-pointer" (click)="createAnotherRoom()">
+    Create Another Room.
+  </a>
+</div>

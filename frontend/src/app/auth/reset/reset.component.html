@@ -1,0 +1,36 @@
+<div class="font-roboto w-5/6 sm:w-96 mx-auto my-8 bg-white p-8 shadow-lg rounded-lg">
+  
+  <div *ngIf="!submitted">
+    <div class="mb-8">
+      <div class="text-lg sm:text-2xl font-light mb-2 sm:mb-3 text-blue-darkest">
+        <span class="font-medium">Reset Password.</span>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <div class="text-sm sm:text-base tracking-wide sm:tracking-normal text-blue-darkest mb-1">
+        <label for="password" class="cursor-pointer ml-1">New Password</label>
+      </div>
+      <input type="password" placeholder="••••••••" id="password" class="w-full bg-grey-lighter rounded outline-none px-4 py-4 hover:shadow focus:shadow border-b border-transparent focus:border-blue" [(ngModel)]="user.password">
+      <div class="text-sm text-red-dark mt-1 text-right h-4">
+        {{ error.password }}
+      </div>
+    </div>
+  
+    <div class="text-right">
+      <button class="bg-blue hover:bg-blue-dark active:bg-blue-darker text-white py-3 px-6 text-sm font-bold uppercase tracking-wide rounded outline-none" (click)="resetPassword()" [disabled]="processing" [ngClass]="{ 'cursor-not-allowed opacity-50': processing }">
+        {{ processing ? 'Processing...' : 'Reset Password' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="text-center" *ngIf="submitted">
+    <div class="text-xl font-medium text-blue-darkest mb-6">
+      Password reset successful.
+    </div>
+    <a routerLink="/login" class="no-underline outline-none text-purple hover:text-purple-dark font-medium tracking-wide text-sm">
+      Login
+    </a>
+  </div>
+
+</div>

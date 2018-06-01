@@ -1,0 +1,34 @@
+<div class="font-roboto absolute w-screen h-screen overflow-hidden pin-t pin-l z-30 flex items-center justify-center" *ngIf="room">
+    <!-- Overlay -->
+    <div class="absolute pin-t pin-l bg-black opacity-50 w-full h-full" (click)="close()"></div>
+    <!-- Modal -->
+    <div class="relative p-6 bg-white rounded-lg shadow-lg w-4/5 md:w-3/5 lg:w-2/5 break-words overflow-hidden z-50">
+
+      <div class="relative">
+        <div class="text-base sm:text-lg md:text-2xl text-black leading-normal" [ngClass]="{ 'appearance-none': showingNameInput }">
+          {{ room.name }}
+          <i class="icon ion-md-create text-grey-dark cursor-pointer" (click)="showNameInput()" *ngIf="room.creatorId === userId"></i>
+        </div>
+        <div *ngIf="showingNameInput" class="w-full flex items-center absolute pin-t pin-l">
+          <input #nameInputBox type="text" class="outline-none text-base sm:text-lg md:text-2xl text-black flex-1 border-b" [(ngModel)]="temp.name" (keydown)="nameInput($event)" maxlength="26">
+          <i class="icon ion-md-checkmark-circle sm:text-2xl text-grey-dark cursor-pointer" (click)="nameInput({ keyCode: 13 })"></i>
+        </div>
+      </div>
+      <div class="relative h-16">
+        <div class="text-sm sm:text-base md:text-lg text-grey-darkest"  [ngClass]="{ 'opacity-0': showingDescriptionInput }">
+          {{ room.description }}
+          <i class="icon ion-md-create text-grey-dark cursor-pointer" (click)="showDescriptionInput()" *ngIf="room.creatorId === userId"></i>
+        </div>
+        <div *ngIf="showingDescriptionInput" class="w-full h-full flex items-end absolute pin-t pin-l">
+          <textarea #descriptionInputBox maxlength="100" class="outline-none resize-none overflow-hidden h-full text-sm sm:text-base md:text-lg text-grey-darkest flex-1 border-b " [(ngModel)]="temp.description" (keydown)="descriptionInput($event)"></textarea>
+          <i class="icon ion-md-checkmark-circle text-2xl text-grey-dark cursor-pointer" (click)="descriptionInput({ keyCode: 13 })"></i>
+        </div>
+      </div>
+  
+      <div class="absolute pin-t pin-r mr-2">
+        <i class="icon ion-md-close text-3xl text-red cursor-pointer" (click)="close()"></i>
+      </div>
+  
+    </div>
+  </div>
+  

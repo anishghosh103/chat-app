@@ -1,0 +1,19 @@
+<div class="px-4">
+
+  <div class="mb-6 font-bold uppercase tracking-wide text-blue-darker text-sm">
+    {{ error ? 'Error' : processing ? 'Processing Invitation...' : 'Invitation Accepted' }}
+  </div>
+
+  <a class="mb-3 inline-block text-purple-dark hover:underline cursor-pointer text-sm font-medium" (click)="checkRoom()">
+    Check Room
+  </a>
+
+  <div class="text-blue-darker text-sm" *ngIf="!processing && !error">
+    Room Joined
+  </div>
+
+  <div class="text-red text-sm" *ngIf="error">
+    {{ error }}
+  </div>
+
+</div>
