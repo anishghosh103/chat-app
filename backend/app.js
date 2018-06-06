@@ -25,6 +25,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.use('/api', api);
+app.use('/apiDoc', express.static(path.join(__dirname, 'api-doc')));
 app.get('/apiDoc', (req, res) => {
   res.sendFile(path.join(__dirname, 'api-doc/index.html'));
 });
