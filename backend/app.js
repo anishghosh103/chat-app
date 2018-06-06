@@ -29,6 +29,10 @@ app.use('/apiDoc', express.static(path.join(__dirname, 'api-doc')));
 app.get('/apiDoc', (req, res) => {
   res.sendFile(path.join(__dirname, 'api-doc/index.html'));
 });
+app.use('/eventDoc', express.static(path.join(__dirname, 'event-doc')));
+app.get('/eventDoc', (req, res) => {
+  res.sendFile(path.join(__dirname, 'event-doc/index.html'));
+});
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
