@@ -119,6 +119,7 @@ export class ChatAreaComponent implements OnInit, AfterViewChecked {
     // events: update
     this.roomService.eventProvider('update')
       .subscribe((response: any) => {
+        console.log(response);
         ifThisRoom(response.data.roomId, () => this.addUpdate(response.data));
       });
 
